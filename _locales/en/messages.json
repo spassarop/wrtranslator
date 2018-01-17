@@ -1,0 +1,81 @@
+{
+    "translate": {
+        "message": "Translate"
+    },
+
+    "selectLanguagesToTranslate": {
+        "message": "Select the languages to translate:"
+    },
+
+    "english": {
+        "message": "English"
+    },
+
+    "spanish": {
+        "message": "Spanish"
+    },
+
+    "portuguese": {
+        "message": "Portuguese"
+    },
+
+    "italian": {
+        "message": "Italian"
+    },
+
+    "french": {
+        "message": "French"
+    },
+
+    "german": {
+        "message": "German"
+    },
+
+    "russian": {
+        "message": "Russian"
+    },
+
+    "japanese": {
+        "message": "Japanese"
+    },
+
+    "arabic": {
+        "message": "Arabic"
+    },
+
+    "korean": {
+        "message": "Korean"
+    },
+
+    "dutch": {
+        "message": "Dutch"
+    },
+
+    "swedish": {
+        "message": "Swedish"
+    },
+
+    "polish": {
+        "message": "Polish"
+    },
+
+    "romanian": {
+        "message": "Romanian"
+    },
+
+    "czech": {
+        "message": "Czech"
+    },
+
+    "greek": {
+        "message": "Greek"
+    },
+
+    "turkish": {
+        "message": "Turkish"
+    },
+
+    "chinese": {
+        "message": "Chinese"
+    }
+}

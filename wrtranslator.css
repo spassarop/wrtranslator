@@ -1,0 +1,21 @@
+/* TODO: Check if !important can be removed */
+#wrtranslator-container {
+    position: fixed !important;
+    z-index: 2147483000 !important; /* http://stackoverflow.com/questions/491052/minimum-and-maximum-value-of-z-index */
+}
+#wrtranslator-link {
+    font-size: 14pt !important;
+    color: blue !important;
+    background-color: white !important;
+    display: inline-block !important;
+    padding: 20px !important;
+    border: 2px solid blue !important;
+    opacity: 0.2 !important;
+}
+#wrtranslator-link:hover {
+    opacity: 0.4 !important;
+}
+#wrtranslator-link:active {
+    opacity: 0.8 !important;
+}
+

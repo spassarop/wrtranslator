@@ -4,8 +4,8 @@
   "version": "1.0",
 
   "author": "Sebastián Passaro",
-  "description": "Firefox extension to allow quick access to www.wordreference.com.",
-  "homepage_url": "https://github.com/spassarop/wrtranslator",
+  "description": "Firefox extension to allow quick access to www.wordreference.com. Based on https://addons.mozilla.org/es/firefox/addon/wordreference-translator/ (currently obsolete).",
+  "homepage_url": "https://github.com/spassarop/wrtranslator/tree/master",
 
   "icons": {
     "48": "icons/wr-icon-48.ico"

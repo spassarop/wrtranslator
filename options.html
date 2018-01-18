@@ -5,26 +5,52 @@
     <meta charset="utf-8">
     <style>
         /* TODO: Move styles to css file */
-        #options-title {
-
+        #wrSaveForm #options-title {
+          font-family: Verdana, Geneva, Tahoma, sans-serif;
+          font-size: large;
         }
-        .selects {
+        #wrSaveForm .selects {
+            height: 30px;
             display: flex;
+        }
+        #wrSaveForm select {
+            width: 120px;
+        }
+        #wrSaveForm .saveIcon {
+          height: 25px;
+          width: 25px;
+          padding: 5px;
+        }
+        #wrSaveForm .arrow {
+          height: 25px;
+          width: 35px;
+          margin: 0px 10px;
+        }
+        #wrSaveForm .selects button {
+          background: white;
+          margin-left: 10px;  
+          border: 1px solid black;
+          border-radius: 5px;
+          height: 30px;
+          width: 40px;
         }
     </style>
   </head>
 
   <body>
-    <form>
-        <label id="options-title"></label>
-        <div class="selects">
-            <select id="source-language"></select>
-            <img src="icons/arrow.png"/>
-            <select id="target-language"></select>
-            <button type="submit"><img src="icons/save.png"></button>
-    </div>
+    <form id="wrSaveForm">
+      <label id="options-title"></label>
+      <label id="lk"></label>
+      <label id="all"></label>
+      <div class="selects">
+          <select id="source-language" name="sourceLanguage"></select>
+          <img class="arrow" src="icons/arrow.png"/>
+          <select id="target-language" name="targetLanguage"></select>
+          <button type="submit"><img class="saveIcon" src="icons/save.png"></button>
+      </div>
     </form>
 
+    <script src="languageData.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

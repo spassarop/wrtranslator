@@ -1,24 +1,121 @@
-// TODO: Get both language options and block target language based on source language.
+import { LANGUAGE_DATA, SUPPORTED_LANGUAGES } from 'languageData';
+
+const SOURCE = 0;
+const TARGET = 1;
+let defaultLanguage;
+let sourceCombo;
+let targetCombo;
+let allOptions = Object.keys(LANGUAGE_DATA).map(createOption);
+
+function getAcceptedLanguage() {
+  const gettingAcceptLanguages = browser.i18n.getAcceptLanguages();
+  gettingAcceptLanguages.then((languages) => { 
+    let preferred;
+    for (const language of languages) {
+      if (SUPPORTED_LANGUAGES.indexOf(language) >= 0) {
+        preferred = language;
+        break;
+      }
+    }
+    setUpOptionsPage(preferred);
+  }, () => { setUpOptionsPage() });  
+}
+
+function setUpOptionsPage(acceptedLanguage) {
+  defaultLanguage = acceptedLanguage || "en-US";
+  const DEFAULT_SOURCE = "es";
+  const DEFAULT_SOURCE_FALLBACK = "en-US";
+
+  function setCurrentSource(result) {
+    const sourceLanguage = result.wrSourceLanguage || (defaultLanguage !== DEFAULT_SOURCE ? DEFAULT_SOURCE : DEFAULT_SOURCE_FALLBACK);
+    loadOptions(SOURCE, sourceLanguage);
+  }
+
+  function setCurrentTarget(result) {
+    const targetLanguage = result.wrTargetLanguage || defaultLanguage;
+    loadOptions(TARGET, targetLanguage);
+  }
+
+  function onSourceError(error) {
+    console.log(`Error: ${error}`);
+    loadOptions(SOURCE, defaultLanguage !== DEFAULT_SOURCE ? DEFAULT_SOURCE : DEFAULT_SOURCE_FALLBACK);
+  }
+
+  function onTargetError(error) {
+    console.log(`Error: ${error}`);
+    loadOptions(TARGET, defaultLanguage);
+  }
+
+  sourceCombo = document.getElementById("source-language");
+  targetCombo = document.getElementById("target-language");
+  sourceCombo.addEventListener('change', (event) => {
+    loadOptions(SOURCE, event.target.value);
+  });
+  targetCombo.addEventListener('change', (event) => {
+    loadOptions(TARGET, event.target.value);
+  });
+
+  let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
+  gettingSourceLanguage.then(setCurrentSource, onSourceError);
+
+  let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
+  gettingTargetLanguage.then(setCurrentTarget, onTargetError);
+
+  const titleLabel = document.getElementById("options-title");
+  titleLabel.innerText = LANGUAGE_DATA[defaultLanguage].messages["selectLanguagesToTranslate"];
+}
+
 function saveOptions(event) {
-    event.preventDefault();
-    browser.storage.local.set({
-      language: document.querySelector("#language").value
-    });
+  event.preventDefault();
+  browser.storage.local.set({
+    wrSourceLanguage: document.getElementById("source-language").value,
+    wrTargetLanguage: document.getElementById("target-language").value
+  });
+  // TODO: Alert save success
+  alert('Options saved successfully');
+}
+
+function loadOptions(option, languageKey) {
+  const currentSource = sourceCombo.value;
+  const currentTarget = targetCombo.value;
+  cleanUpOptions(sourceCombo);
+  cleanUpOptions(targetCombo);
+  
+  switch (option) {
+    case SOURCE:
+      fillCombos(targetCombo, sourceCombo, currentTarget, languageKey);      
+      break;
+    case TARGET:
+      fillCombos(sourceCombo, targetCombo, currentSource, languageKey);
+      break;
   }
-  
-  function restoreOptions() {
-  
-    function setCurrentChoice(result) {
-      document.querySelector("#language").value = result.language || browser.i18n.getUILanguage();
-    }
-  
-    function onError(error) {
-      console.log(`Error: ${error}`);
-    }
-  
-    var getting = browser.storage.local.get("language");
-    getting.then(setCurrentChoice, onError);
+}
+
+function fillCombos(selectionCombo, fillAllCombo, currentValue, languageKey) {
+  // TODO: Order options
+  for (const fillAllOption of allOptions) {
+    fillAllCombo.appendChild(fillAllOption);
+  }      
+  for (const option of LANGUAGE_DATA[languageKey].allowedTranslations) {        
+    selectionCombo.appendChild(createOption(option));
   }
-  
-  document.addEventListener("DOMContentLoaded", restoreOptions);
-  document.querySelector("form").addEventListener("submit", saveOptions);
+  fillAllCombo.value = languageKey;
+  const currentIndex = LANGUAGE_DATA[languageKey].allowedTranslations.indexOf(currentValue);
+  selectionCombo.value = currentIndex > 0 ? LANGUAGE_DATA[languageKey].allowedTranslations[currentIndex] : LANGUAGE_DATA[languageKey].allowedTranslations[0];
+}
+
+function createOption(language) {
+  let newOption = document.createElement("option");
+  newOption.value = language;
+  newOption.innerText = LANGUAGE_DATA[defaultLanguage].messages[language];
+  return newOption;
+}
+
+function cleanUpOptions(combo) {
+  while (combo.firstChild) {
+    combo.removeChild(combo.firstChild);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", getAcceptedLanguage);
+document.querySelector("form").addEventListener("submit", saveOptions);

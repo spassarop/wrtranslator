@@ -1,3 +1,4 @@
+import { LANGUAGE_DATA } from 'languageData';
 /**
  * Check and set a global guard variable.
  * If this content script is injected into the same page again,
@@ -7,8 +8,6 @@
 //   return;
 // }
 // window.hasRun = true;
-
-const DEFAULT_TRANSLATE_TEXT = "translate"; // TODO: Make sure English works to use capital letter.
 
 function showFloatingLink (event) {
   let selectedText = window.getSelection().toString().trim();
@@ -28,7 +27,7 @@ function showFloatingLink (event) {
         translateLink = document.createElement("a");
         translateLink.id = "wrtranslator-link";
         translateLink.target = "_blank";
-        translateLink.textContent = browser.i18n.getMessage("translate") || DEFAULT_TRANSLATE_TEXT;
+        translateLink.textContent = LANGUAGE_DATA[targetLanguage].messages["translate"];
 
         translateDiv.appendChild(translateLink);
         currentPageBody.appendChild(translateDiv);
@@ -42,8 +41,41 @@ function showFloatingLink (event) {
   }
 }
 
+// TODO: Check if language loading works
+function loadLanguages() {
+  const DEFAULT_SOURCE = "es";
+  const DEFAULT_TARGET = "en-US";
+  let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
+  gettingSourceLanguage.then(setCurrentSource, loadDefaults);
+
+  function setCurrentSource(result) {
+    const loadedSource = result.wrSourceLanguage;
+    if (!loadedSource) {
+      loadDefaults();
+    } else {
+      sourceLanguage = loadedSource;
+      let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
+      gettingTargetLanguage.then(setCurrentTarget, loadDefaults);
+    }
+  }
+
+  function setCurrentTarget(result) {
+    const loadedTarget = result.wrTargetLanguage;
+    if (!loadedTarget) {
+      loadDefaults();
+    } else {
+      targetLanguage = loadedTarget;
+    }
+  }
+
+  function loadDefaults() {
+    sourceLanguage = DEFAULT_SOURCE;
+    targetLanguage = DEFAULT_TARGET;
+  }  
+}
+
 function getTranslationUrl(selectedText) {
-  return `http://www.wordreference.com/es/translation.asp?tranword=${selectedText}`;
+  return `http://www.wordreference.com/${LANGUAGE_DATA[sourceLanguage].partialPath[targetLanguage]}${selectedText}`;
 }
 
 function closeFloatingLink() {
@@ -57,6 +89,10 @@ function attemptClosing(event) {
   }
 }
 
+let targetLanguage;
+let sourceLanguage;
+
 window.addEventListener("dblclick", showFloatingLink);
-window.addEventListener("click", closeFloatingLink);
+window.addEventListener("click", attemptClosing);
+window.addEventListener("load", loadLanguages);
 // browser.runtime.onMessage.addListener(closeFloatingLink);

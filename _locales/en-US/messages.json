@@ -1,0 +1,21 @@
+{
+    "translate": {
+        "message": "Translate"
+    },
+
+    "selectLanguagesToTranslate": {
+        "message": "Select the languages to translate:"
+    },
+
+    "en-US": {
+        "message": "English"
+    },
+
+    "es": {
+        "message": "Spanish"
+    },
+
+    "pt_BR": {
+        "message": "Portuguese"
+    }
+}

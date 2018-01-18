@@ -33,5 +33,7 @@
     "page": "options.html"
   },
 
-  "permissions": ["storage"]
+  "permissions": ["storage"],
+
+  "default_locale": "en-US"
 }

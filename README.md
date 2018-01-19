@@ -20,3 +20,8 @@ Not implemented yet or entirely:
 
 Not going to be implemented:
 - Thunderbird version.
+
+Try it out!
+-----------
+
+To try out the extension follow the 'Installing' step on the [Mozilla's developer guide](https://developer.mozilla.org/en-US/Add-ons/WebExtensions/Your_first_WebExtension#Trying_it_out).

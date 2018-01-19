@@ -3,45 +3,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <style>
-        /* TODO: Move styles to css file */
-        #wrSaveForm #options-title {
-          font-family: Verdana, Geneva, Tahoma, sans-serif;
-          font-size: large;
-        }
-        #wrSaveForm .selects {
-            height: 30px;
-            display: flex;
-        }
-        #wrSaveForm select {
-            width: 120px;
-        }
-        #wrSaveForm .saveIcon {
-          height: 25px;
-          width: 25px;
-          padding: 5px;
-        }
-        #wrSaveForm .arrow {
-          height: 25px;
-          width: 35px;
-          margin: 0px 10px;
-        }
-        #wrSaveForm .selects button {
-          background: white;
-          margin-left: 10px;  
-          border: 1px solid black;
-          border-radius: 5px;
-          height: 30px;
-          width: 40px;
-        }
-    </style>
+    <link rel="stylesheet" type ="text/css" href="options.css"/>
   </head>
 
   <body>
     <form id="wrSaveForm">
       <label id="options-title"></label>
-      <label id="lk"></label>
-      <label id="all"></label>
       <div class="selects">
           <select id="source-language" name="sourceLanguage"></select>
           <img class="arrow" src="icons/arrow.png"/>
@@ -50,7 +17,6 @@
       </div>
     </form>
 
-    <script src="languageData.js"></script>
     <script src="options.js"></script>
   </body>
 </html>

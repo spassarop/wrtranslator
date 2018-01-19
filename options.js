@@ -1,12 +1,3 @@
-import { LANGUAGE_DATA, SUPPORTED_LANGUAGES } from 'languageData';
-
-const SOURCE = 0;
-const TARGET = 1;
-let defaultLanguage;
-let sourceCombo;
-let targetCombo;
-let allOptions = Object.keys(LANGUAGE_DATA).map(createOption);
-
 function getAcceptedLanguage() {
   const gettingAcceptLanguages = browser.i18n.getAcceptLanguages();
   gettingAcceptLanguages.then((languages) => { 
@@ -22,9 +13,6 @@ function getAcceptedLanguage() {
 }
 
 function setUpOptionsPage(acceptedLanguage) {
-  defaultLanguage = acceptedLanguage || "en-US";
-  const DEFAULT_SOURCE = "es";
-  const DEFAULT_SOURCE_FALLBACK = "en-US";
 
   function setCurrentSource(result) {
     const sourceLanguage = result.wrSourceLanguage || (defaultLanguage !== DEFAULT_SOURCE ? DEFAULT_SOURCE : DEFAULT_SOURCE_FALLBACK);
@@ -45,6 +33,11 @@ function setUpOptionsPage(acceptedLanguage) {
     console.log(`Error: ${error}`);
     loadOptions(TARGET, defaultLanguage);
   }
+
+  defaultLanguage = acceptedLanguage || "en-US";
+  allOptions = Object.keys(LANGUAGE_DATA).map(createOption);
+  const DEFAULT_SOURCE = "es";
+  const DEFAULT_SOURCE_FALLBACK = "en-US";
 
   sourceCombo = document.getElementById("source-language");
   targetCombo = document.getElementById("target-language");
@@ -72,7 +65,6 @@ function saveOptions(event) {
     wrTargetLanguage: document.getElementById("target-language").value
   });
   // TODO: Alert save success
-  alert('Options saved successfully');
 }
 
 function loadOptions(option, languageKey) {
@@ -117,5 +109,55 @@ function cleanUpOptions(combo) {
   }
 }
 
-document.addEventListener("DOMContentLoaded", getAcceptedLanguage);
 document.querySelector("form").addEventListener("submit", saveOptions);
+document.addEventListener("DOMContentLoaded", getAcceptedLanguage);
+
+const SOURCE = 0;
+const TARGET = 1;
+let defaultLanguage;
+let sourceCombo;
+let targetCombo;
+let allOptions;
+
+const SUPPORTED_LANGUAGES = ['es', 'en-US', 'pt'];
+
+const LANGUAGE_DATA = {
+  'en-US': {
+    'allowedTranslations': [
+      'es',
+      'pt_BR'
+    ],
+    'messages': {
+      'selectLanguagesToTranslate': 'Select the languages to translate:',  
+      'en-US': 'English',  
+      'es': 'Spanish',  
+      'pt_BR': 'Portuguese'
+    }
+  },
+
+  'es': {
+    'allowedTranslations': [
+      'en-US',
+      'pt_BR'
+    ],
+    'messages': {
+      'selectLanguagesToTranslate': 'Seleccione los lenguajes a traducir:',  
+      'en-US': 'Inglés',  
+      'es': 'Español',  
+      'pt_BR': 'Portugués'
+    }
+  },
+
+  'pt_BR': {
+    'allowedTranslations': [
+      'en-US',
+      'es'
+    ],
+    'messages': {
+        'selectLanguagesToTranslate': 'Selecione os idiomas a serem traduzidos:',  
+        'en-US': 'Inglês',  
+        'es': 'Espanhol',  
+        'pt_BR': 'Português'
+    }
+  }
+};

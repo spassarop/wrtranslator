@@ -18,7 +18,7 @@
           translateLink = document.createElement("a");
           translateLink.id = "wrtranslator-link";
           translateLink.target = "_blank";
-          translateLink.textContent = LANGUAGE_DATA[targetLanguage].messages["translate"];
+          translateLink.textContent = LANGUAGE_DATA[targetLanguage].messages.translate;
 
           translateDiv.appendChild(translateLink);
           currentPageBody.appendChild(translateDiv);
@@ -67,6 +67,9 @@
     function addEventListeners() {
       window.addEventListener("dblclick", showFloatingLink);
       window.addEventListener("click", attemptClosing);
+      browser.runtime.sendMessage({ 
+        messages: LANGUAGE_DATA[targetLanguage].messages
+      });
       console.log(`Events attached. Source language: ${sourceLanguage}. Target language: ${targetLanguage}.`);
     }
   }
@@ -86,9 +89,15 @@
     }
   }
 
+  function translateInNewTab(message) {
+    return Promise.resolve({ url: getTranslationUrl(message.selectedText) });
+  }
+
   let sourceLanguage;
   let targetLanguage;
   loadLanguages();
+
+  browser.runtime.onMessage.addListener(translateInNewTab);
 
   const LANGUAGE_DATA = {
     'en': {
@@ -98,7 +107,8 @@
         'fr': 'enfr/'
       },
       'messages': {
-        'translate': 'Translate'
+        'translate': 'Translate',
+        'openSettings': 'WordReference Translator settings'
       }
     },
 
@@ -109,7 +119,8 @@
         'fr': 'esfr/'
       },
       'messages': {
-        'translate': 'Traducir'
+        'translate': 'Traducir',
+        'openSettings': 'Configuración de WordReference Translator'
       }
     },
 
@@ -120,6 +131,7 @@
       },
       'messages': {
           'translate': 'Traduzir',
+          'openSettings': 'Configuração do WordReference Translator'
       }
     },
 
@@ -130,6 +142,7 @@
       },
       'messages': {
           'translate': 'Traduire',
+          'openSettings': 'Paramètres du WordReference Translator'
       }
     }
   };

@@ -33,7 +33,7 @@
     "page": "options.html"
   },
 
-  "permissions": ["storage"],
+  "permissions": ["storage", "menus"],
 
   "default_locale": "en-US"
 }

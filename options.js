@@ -3,8 +3,9 @@ function getAcceptedLanguage() {
   gettingAcceptLanguages.then((languages) => { 
     let preferred;
     for (const language of languages) {
-      if (SUPPORTED_LANGUAGES.indexOf(language) >= 0) {
-        preferred = language;
+      let match = /(\w+)(:?-\w+)?/.exec(language);   
+      if (match && match.length && SUPPORTED_LANGUAGES.indexOf(match[1]) >= 0) {
+        preferred = match[1];
         break;
       }
     }
@@ -34,10 +35,10 @@ function setUpOptionsPage(acceptedLanguage) {
     loadOptions(TARGET, defaultLanguage);
   }
 
-  defaultLanguage = acceptedLanguage || "en-US";
+  defaultLanguage = acceptedLanguage || "en";
   allOptions = Object.keys(LANGUAGE_DATA).map(createOption);
   const DEFAULT_SOURCE = "es";
-  const DEFAULT_SOURCE_FALLBACK = "en-US";
+  const DEFAULT_SOURCE_FALLBACK = "en";
 
   sourceCombo = document.getElementById("source-language");
   targetCombo = document.getElementById("target-language");
@@ -119,64 +120,64 @@ let sourceCombo;
 let targetCombo;
 let allOptions;
 
-const SUPPORTED_LANGUAGES = ['es', 'en-US', 'pt', 'fr-fr'];
+const SUPPORTED_LANGUAGES = ['es', 'en', 'pt', 'fr'];
 
 const LANGUAGE_DATA = {
-  'en-US': {
+  'en': {
     'allowedTranslations': [
       'es',
-      'pt_BR',
-      'fr-fr'
+      'pt',
+      'fr'
     ],
     'messages': {
       'selectLanguagesToTranslate': 'Select the languages to translate:',  
-      'en-US': 'English',  
+      'en': 'English',  
       'es': 'Spanish',  
-      'pt_BR': 'Portuguese',
-      'fr-fr': 'French'
+      'pt': 'Portuguese',
+      'fr': 'French'
     }
   },
 
   'es': {
     'allowedTranslations': [
-      'en-US',
-      'pt_BR',
-      'fr-fr'
+      'en',
+      'pt',
+      'fr'
     ],
     'messages': {
       'selectLanguagesToTranslate': 'Seleccione los lenguajes a traducir:',  
-      'en-US': 'Inglés',  
+      'en': 'Inglés',  
       'es': 'Español',  
-      'pt_BR': 'Portugués',
-      'fr-fr': 'Francés'
+      'pt': 'Portugués',
+      'fr': 'Francés'
     }
   },
 
-  'pt_BR': {
+  'pt': {
     'allowedTranslations': [
-      'en-US',
+      'en',
       'es'
     ],
     'messages': {
         'selectLanguagesToTranslate': 'Selecione os idiomas a serem traduzidos:',  
-        'en-US': 'Inglês',  
+        'en': 'Inglês',  
         'es': 'Espanhol',  
-        'pt_BR': 'Português',
-        'fr-fr': 'Francês'
+        'pt': 'Português',
+        'fr': 'Francês'
     }
   },
 
-  'fr-fr': {
+  'fr': {
     'allowedTranslations': [
-      'en-US',
+      'en',
       'es'
     ],
     'messages': {
         'selectLanguagesToTranslate': 'Sélectionnez les langues à traduire:',  
-        'en-US': 'Anglais',  
+        'en': 'Anglais',  
         'es': 'Espanol',  
-        'pt_BR': 'Portugais',
-        'fr-fr': 'Français'
+        'pt': 'Portugais',
+        'fr': 'Français'
     }
   }
 };

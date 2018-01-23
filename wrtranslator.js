@@ -33,7 +33,7 @@
 
   function loadLanguages() {
     const DEFAULT_SOURCE = "es";
-    const DEFAULT_TARGET = "en-US";
+    const DEFAULT_TARGET = "en";
     let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
     gettingSourceLanguage.then(setCurrentSource, loadDefaults);
 
@@ -91,11 +91,11 @@
   loadLanguages();
 
   const LANGUAGE_DATA = {
-    'en-US': {
+    'en': {
       'partialPath': {
         'es': 'es/translation.asp?tranword=',
-        'pt_BR': 'enpt/',
-        'fr-fr': 'enfr/'
+        'pt': 'enpt/',
+        'fr': 'enfr/'
       },
       'messages': {
         'translate': 'Translate'
@@ -104,18 +104,18 @@
 
     'es': {
       'partialPath': {
-        'en-US': 'es/en/translation.asp?spen=',
-        'pt_BR': 'espt/',
-        'fr-fr': 'esfr/'
+        'en': 'es/en/translation.asp?spen=',
+        'pt': 'espt/',
+        'fr': 'esfr/'
       },
       'messages': {
         'translate': 'Traducir'
       }
     },
 
-    'pt_BR': {
+    'pt': {
       'partialPath': {
-        'en-US': 'pten/',
+        'en': 'pten/',
         'es': 'ptes/'
       },
       'messages': {
@@ -123,9 +123,9 @@
       }
     },
 
-    'fr-fr': {
+    'fr': {
       'partialPath': {
-        'en-US': 'fren/',
+        'en': 'fren/',
         'es': 'fres/',
       },
       'messages': {

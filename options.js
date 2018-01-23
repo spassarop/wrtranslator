@@ -119,32 +119,36 @@ let sourceCombo;
 let targetCombo;
 let allOptions;
 
-const SUPPORTED_LANGUAGES = ['es', 'en-US', 'pt'];
+const SUPPORTED_LANGUAGES = ['es', 'en-US', 'pt', 'fr-fr'];
 
 const LANGUAGE_DATA = {
   'en-US': {
     'allowedTranslations': [
       'es',
-      'pt_BR'
+      'pt_BR',
+      'fr-fr'
     ],
     'messages': {
       'selectLanguagesToTranslate': 'Select the languages to translate:',  
       'en-US': 'English',  
       'es': 'Spanish',  
-      'pt_BR': 'Portuguese'
+      'pt_BR': 'Portuguese',
+      'fr-fr': 'French'
     }
   },
 
   'es': {
     'allowedTranslations': [
       'en-US',
-      'pt_BR'
+      'pt_BR',
+      'fr-fr'
     ],
     'messages': {
       'selectLanguagesToTranslate': 'Seleccione los lenguajes a traducir:',  
       'en-US': 'Inglés',  
       'es': 'Español',  
-      'pt_BR': 'Portugués'
+      'pt_BR': 'Portugués',
+      'fr-fr': 'Francés'
     }
   },
 
@@ -157,7 +161,22 @@ const LANGUAGE_DATA = {
         'selectLanguagesToTranslate': 'Selecione os idiomas a serem traduzidos:',  
         'en-US': 'Inglês',  
         'es': 'Espanhol',  
-        'pt_BR': 'Português'
+        'pt_BR': 'Português',
+        'fr-fr': 'Francês'
+    }
+  },
+
+  'fr-fr': {
+    'allowedTranslations': [
+      'en-US',
+      'es'
+    ],
+    'messages': {
+        'selectLanguagesToTranslate': 'Sélectionnez les langues à traduire:',  
+        'en-US': 'Anglais',  
+        'es': 'Espanol',  
+        'pt_BR': 'Portugais',
+        'fr-fr': 'Français'
     }
   }
 };

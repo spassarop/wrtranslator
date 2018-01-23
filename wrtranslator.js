@@ -94,7 +94,8 @@
     'en-US': {
       'partialPath': {
         'es': 'es/translation.asp?tranword=',
-        'pt_BR': 'enpt/'
+        'pt_BR': 'enpt/',
+        'fr-fr': 'enfr/'
       },
       'messages': {
         'translate': 'Translate'
@@ -104,7 +105,8 @@
     'es': {
       'partialPath': {
         'en-US': 'es/en/translation.asp?spen=',
-        'pt_BR': 'espt/'
+        'pt_BR': 'espt/',
+        'fr-fr': 'esfr/'
       },
       'messages': {
         'translate': 'Traducir'
@@ -114,10 +116,20 @@
     'pt_BR': {
       'partialPath': {
         'en-US': 'pten/',
-        'es': 'ptes/',
+        'es': 'ptes/'
       },
       'messages': {
           'translate': 'Traduzir',
+      }
+    },
+
+    'fr-fr': {
+      'partialPath': {
+        'en-US': 'fren/',
+        'es': 'fres/',
+      },
+      'messages': {
+          'translate': 'Traduire',
       }
     }
   };

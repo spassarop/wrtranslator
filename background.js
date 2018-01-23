@@ -3,7 +3,7 @@
 */
 function openWordReference(url) {
     browser.tabs.create({
-        "url": url || "http://www.wordreference.com/"
+        "url": (typeof url === "string" ? url : "http://www.wordreference.com/")
     });
 }
 

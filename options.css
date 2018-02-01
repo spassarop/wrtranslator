@@ -1,29 +1,35 @@
 #wrSaveForm #options-title {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: large;
-  }
-  #wrSaveForm .selects {
-      height: 30px;
-      display: flex;
-  }
-  #wrSaveForm select {
-      width: 120px;
-  }
-  #wrSaveForm .saveIcon {
-    height: 25px;
-    width: 25px;
-    padding: 5px;
-  }
-  #wrSaveForm .arrow {
-    height: 25px;
-    width: 35px;
-    margin: 0px 10px;
-  }
-  #wrSaveForm .selects button {
-    background: white;
-    margin-left: 10px;  
-    border: 1px solid black;
-    border-radius: 5px;
-    height: 30px;
-    width: 40px;
-  }
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-size: 24px;
+}
+#wrSaveForm .selects {
+  height: 30px;
+  display: flex;
+  margin-top: 15px;
+}
+#wrSaveForm select {
+  width: 130px;
+  height: 35px;
+  font-size: large;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  border-radius: 2px;
+  border: 1px solid lightgray;
+}
+#wrSaveForm .saveIcon {
+  height: 28px;
+  width: 28px;
+  padding: 7px 9px 5px 3px;
+}
+#wrSaveForm .arrow {
+  height: 25px;
+  width: 35px;
+  margin: 5px 10px;
+}
+#wrSaveForm .selects button {
+  background: white;
+  margin-left: 10px;  
+  border: 1px solid black;
+  border-radius: 5px;
+  height: 35px;
+  width: 40px;
+}

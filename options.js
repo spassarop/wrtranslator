@@ -65,7 +65,6 @@ function saveOptions(event) {
   browser.runtime.reload();
   // Refresh tab to avoid crazy HTML duplicate
   browser.tabs.reload();
-  // TODO: Alert save success
 }
 
 function loadOptions(option, languageKey) {

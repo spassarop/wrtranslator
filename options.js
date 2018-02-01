@@ -120,64 +120,66 @@ let sourceCombo;
 let targetCombo;
 let allOptions;
 
-const SUPPORTED_LANGUAGES = ['es', 'en', 'pt', 'fr'];
+const SUPPORTED_LANGUAGES = ['es', 'en', 'pt', 'fr', 'it'];
 
 const LANGUAGE_DATA = {
   'en': {
-    'allowedTranslations': [
-      'es',
-      'pt',
-      'fr'
-    ],
+    'allowedTranslations': ['es', 'pt', 'fr', 'it'],
     'messages': {
       'selectLanguagesToTranslate': 'Select the languages to translate:',  
       'en': 'English',  
       'es': 'Spanish',  
       'pt': 'Portuguese',
-      'fr': 'French'
+      'fr': 'French',
+      'it': 'Italian'
     }
   },
 
   'es': {
-    'allowedTranslations': [
-      'en',
-      'pt',
-      'fr'
-    ],
+    'allowedTranslations': ['en', 'pt', 'fr', 'it'],
     'messages': {
       'selectLanguagesToTranslate': 'Seleccione los lenguajes a traducir:',  
       'en': 'Inglés',  
       'es': 'Español',  
       'pt': 'Portugués',
-      'fr': 'Francés'
+      'fr': 'Francés',
+      'it': 'Italiano'
     }
   },
 
   'pt': {
-    'allowedTranslations': [
-      'en',
-      'es'
-    ],
+    'allowedTranslations': ['en', 'es'],
     'messages': {
         'selectLanguagesToTranslate': 'Selecione os idiomas a serem traduzidos:',  
         'en': 'Inglês',  
         'es': 'Espanhol',  
         'pt': 'Português',
-        'fr': 'Francês'
+        'fr': 'Francês',
+        'it': 'Italiano'
     }
   },
 
   'fr': {
-    'allowedTranslations': [
-      'en',
-      'es'
-    ],
+    'allowedTranslations': ['en', 'es'],
     'messages': {
         'selectLanguagesToTranslate': 'Sélectionnez les langues à traduire:',  
         'en': 'Anglais',  
         'es': 'Espanol',  
         'pt': 'Portugais',
-        'fr': 'Français'
+        'fr': 'Français',
+        'it': 'Italien'
+    }
+  },
+
+  'it': {
+    'allowedTranslations': ['en', 'es'],
+    'messages': {
+        'selectLanguagesToTranslate': 'Seleziona le lingue da tradurre:',  
+        'en': 'Inglese',
+        'es': 'Spagnolo',
+        'pt': 'Portoghese',
+        'fr': 'Francese',
+        'it': 'Italiano'
     }
   }
 };

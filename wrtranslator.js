@@ -104,7 +104,8 @@
       'partialPath': {
         'es': 'es/translation.asp?tranword=',
         'pt': 'enpt/',
-        'fr': 'enfr/'
+        'fr': 'enfr/',
+        'it': 'enit/'
       },
       'messages': {
         'translate': 'Translate',
@@ -116,7 +117,8 @@
       'partialPath': {
         'en': 'es/en/translation.asp?spen=',
         'pt': 'espt/',
-        'fr': 'esfr/'
+        'fr': 'esfr/',
+        'it': 'esit/'
       },
       'messages': {
         'translate': 'Traducir',
@@ -138,11 +140,22 @@
     'fr': {
       'partialPath': {
         'en': 'fren/',
-        'es': 'fres/',
+        'es': 'fres/'
       },
       'messages': {
           'translate': 'Traduire',
           'openSettings': 'Paramètres du WordReference Translator'
+      }
+    },
+
+    'it': {
+      'partialPath': {
+        'en': 'iten/',
+        'es': 'ites/'
+      },
+      'messages': {
+          'translate': 'Traduci',
+          'openSettings': 'Configurazione di WordReference Translator'
       }
     }
   };

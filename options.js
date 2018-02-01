@@ -1,6 +1,6 @@
 function getAcceptedLanguage() {
   const gettingAcceptLanguages = browser.i18n.getAcceptLanguages();
-  gettingAcceptLanguages.then((languages) => { 
+  gettingAcceptLanguages.then(languages => { 
     let preferred;
     for (const language of languages) {
       let match = /(\w+)(:?-\w+)?/.exec(language);   
@@ -10,7 +10,7 @@ function getAcceptedLanguage() {
       }
     }
     setUpOptionsPage(preferred);
-  }, () => { setUpOptionsPage() });  
+  }, () => setUpOptionsPage());  
 }
 
 function setUpOptionsPage(acceptedLanguage) {
@@ -42,12 +42,8 @@ function setUpOptionsPage(acceptedLanguage) {
 
   sourceCombo = document.getElementById("source-language");
   targetCombo = document.getElementById("target-language");
-  sourceCombo.addEventListener('change', (event) => {
-    loadOptions(SOURCE, event.target.value);
-  });
-  targetCombo.addEventListener('change', (event) => {
-    loadOptions(TARGET, event.target.value);
-  });
+  sourceCombo.addEventListener('change', event => loadOptions(SOURCE, event.target.value));
+  targetCombo.addEventListener('change', event => loadOptions(TARGET, event.target.value));
 
   let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
   gettingSourceLanguage.then(setCurrentSource, onSourceError);

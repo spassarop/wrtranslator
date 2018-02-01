@@ -20,9 +20,7 @@ browser.menus.onClicked.addListener((info, tab) => {
         case "wr-translate":
             browser.tabs.sendMessage(tab.id, {
                 "selectedText": info.selectionText.trim() 
-            }).then(response => {
-                openWordReference(response.url);
-            });
+            }).then(response => openWordReference(response.url));
             break;
     }
 });

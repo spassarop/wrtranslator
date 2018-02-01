@@ -65,6 +65,10 @@ function saveOptions(event) {
     wrSourceLanguage: document.getElementById("source-language").value,
     wrTargetLanguage: document.getElementById("target-language").value
   });
+  // Reload app after saving the new settings
+  browser.runtime.reload();
+  // Refresh tab to avoid crazy HTML duplicate
+  browser.tabs.reload();
   // TODO: Alert save success
 }
 

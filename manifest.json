@@ -35,5 +35,5 @@
 
   "permissions": ["storage", "menus"],
 
-  "default_locale": "en-US"
+  "default_locale": "en"
 }

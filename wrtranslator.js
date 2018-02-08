@@ -1,13 +1,16 @@
 (function () {
 
   function showFloatingLink (event) {
-    let selectedText = window.getSelection().toString().trim();
+    const Y_LIMMIT = 60;
+    const placeOnTop = event.clientY > Y_LIMMIT;
+    const TOP_OFFSET = placeOnTop ? 65 : 17;
+    const LEFT_OFFSET = 40;
+    const selectedText = window.getSelection().toString().trim();
     if (selectedText !== "") {
       // Double click was with in a HTML document
       if (event.target.ownerDocument.body !== null) {
                   
-        // Save a reference to the body the floating link is in (could be N tabs)
-        let currentPageBody = event.target.ownerDocument.body;
+        const currentPageBody = event.target.ownerDocument.body;
         let translateDiv = document.getElementById("wrtranslator-container");
         let translateLink = document.getElementById("wrtranslator-link");
 
@@ -24,8 +27,10 @@
           currentPageBody.appendChild(translateDiv);
         }
         
-        translateDiv.style.top = `${event.clientY}px`;
-        translateDiv.style.left = `${event.clientX}px`;
+        const topPosition = placeOnTop ? event.clientY - TOP_OFFSET : event.clientY + TOP_OFFSET;
+        translateDiv.classList = placeOnTop ? "onTop" : "onBottom";
+        translateDiv.style.top = `${topPosition}px`;
+        translateDiv.style.left = `${event.clientX - LEFT_OFFSET}px`;
         translateLink.href = getTranslationUrl(selectedText);
       }
     }

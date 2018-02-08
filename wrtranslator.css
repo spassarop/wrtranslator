@@ -3,19 +3,38 @@
     z-index: 2147483000; /* http://stackoverflow.com/questions/491052/minimum-and-maximum-value-of-z-index */
 }
 #wrtranslator-container #wrtranslator-link {
-    font-size: 14pt;
+    font-size: 11pt;
     color: blue;
     background-color: white;
     display: inline-block;
-    padding: 20px;
+    padding: 8px;
     border: 2px solid blue;
     opacity: 0.2;
     text-decoration: none;
+    border-radius: 6px;
 }
-#wrtranslator-container #wrtranslator-link:hover {
+#wrtranslator-container #wrtranslator-link:hover,
+#wrtranslator-container:hover::after {
     opacity: 0.4;
 }
-#wrtranslator-container #wrtranslator-link:active {
+#wrtranslator-container #wrtranslator-link:active,
+#wrtranslator-container:active::after {
     opacity: 0.8;
 }
-
+#wrtranslator-container::after {
+    content: "";
+    border-width: 5px;
+    border-style: solid;
+    position: absolute;
+    opacity: 0.2;
+    left: 50%;
+    margin-left: -5px;
+}
+#wrtranslator-container.onTop::after {
+    border-color: blue transparent transparent transparent;
+    top: 100%;
+}
+#wrtranslator-container.onBottom::after {
+    border-color: transparent transparent blue transparent;
+    bottom: 100%;
+}

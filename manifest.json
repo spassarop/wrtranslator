@@ -1,7 +1,7 @@
 {
   "manifest_version": 2,
   "name": "WordReference Translator",
-  "version": "1.0.3",
+  "version": "1.0.4",
 
   "author": "Sebastián Passaro",
   "description": "Firefox extension to allow quick access to www.wordreference.com. Based on https://addons.mozilla.org/es/firefox/addon/wordreference-translator/ (currently obsolete).",

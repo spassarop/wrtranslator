@@ -1,14 +1,16 @@
 {
   "manifest_version": 2,
   "name": "WordReference Translator",
-  "version": "1.0.4",
+  "version": "1.0.5",
 
   "author": "Sebastián Passaro",
-  "description": "Firefox extension to allow quick access to www.wordreference.com. Based on https://addons.mozilla.org/es/firefox/addon/wordreference-translator/ (currently obsolete).",
-  "homepage_url": "https://github.com/spassarop/wrtranslator/tree/master",
+  "description": "Chrome extension to allow quick access to www.wordreference.com.",
+  "homepage_url": "https://github.com/spassarop/wrtranslator/tree/refactor/chrome",
 
   "icons": {
-    "48": "icons/wr-icon-48.ico"
+    "16": "icons/wr-icon-16.png",
+    "48": "icons/wr-icon-48.png",
+    "128": "icons/wr-icon-128.png"
   },
 
   "content_scripts": [
@@ -25,7 +27,7 @@
 
   "browser_action": {
     "browser_style": true,
-    "default_icon": "icons/wr-icon-48.ico",
+    "default_icon": "icons/wr-icon-16.png",
     "default_title": "www.wordreference.com"
   },
 
@@ -33,7 +35,7 @@
     "page": "options.html"
   },
 
-  "permissions": ["storage", "menus"],
+  "permissions": ["storage", "contextMenus"],
 
   "default_locale": "en"
 }

@@ -4,6 +4,6 @@
     },
 
     "extensionDescription": {
-        "message": "Firefox extension to allow quick access to www.wordreference.com. Based on https://addons.mozilla.org/es/firefox/addon/wordreference-translator/ (currently obsolete)."
+        "message": "Firefox extension to allow quick access to www.wordreference.com."
     }
 }

@@ -39,8 +39,7 @@
   function loadLanguages() {
     const DEFAULT_SOURCE = "es";
     const DEFAULT_TARGET = "en";
-    let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
-    gettingSourceLanguage.then(setCurrentSource, loadDefaults);
+    chrome.storage.local.get("wrSourceLanguage", setCurrentSource);
 
     function setCurrentSource(result) {
       const loadedSource = result.wrSourceLanguage;
@@ -48,8 +47,7 @@
         loadDefaults();
       } else {
         sourceLanguage = loadedSource;
-        let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
-        gettingTargetLanguage.then(setCurrentTarget, loadDefaults);
+        chrome.storage.local.get("wrTargetLanguage", setCurrentTarget);
       }
     }
 
@@ -72,7 +70,7 @@
     function addEventListeners() {
       window.addEventListener("dblclick", showFloatingLink);
       window.addEventListener("click", attemptClosing);
-      browser.runtime.sendMessage({ 
+      chrome.runtime.sendMessage({ 
         messages: LANGUAGE_DATA[targetLanguage].messages
       });
       console.log(`Events attached. Source language: ${sourceLanguage}. Target language: ${targetLanguage}.`);
@@ -85,7 +83,7 @@
 
   function closeFloatingLink() {
     let translateDiv = document.getElementById("wrtranslator-container");
-    translateDiv.remove();  
+    if (translateDiv) translateDiv.remove();  
   }
 
   function attemptClosing(event) {
@@ -94,15 +92,15 @@
     }
   }
 
-  function translateInNewTab(message) {
-    return Promise.resolve({ url: getTranslationUrl(message.selectedText) });
+  function translateInNewTab(message, sender, sendUrl) {
+    sendUrl.call(this, getTranslationUrl(message.selectedText));
   }
 
   let sourceLanguage;
   let targetLanguage;
   loadLanguages();
 
-  browser.runtime.onMessage.addListener(translateInNewTab);
+  chrome.runtime.onMessage.addListener(translateInNewTab);
 
   const LANGUAGE_DATA = {
     'en': {

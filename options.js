@@ -1,6 +1,5 @@
 function getAcceptedLanguage() {
-  const gettingAcceptLanguages = browser.i18n.getAcceptLanguages();
-  gettingAcceptLanguages.then(languages => { 
+  const gettingAcceptLanguages = chrome.i18n.getAcceptLanguages(languages => { 
     let preferred;
     for (const language of languages) {
       let match = /(\w+)(:?-\w+)?/.exec(language);   
@@ -10,7 +9,7 @@ function getAcceptedLanguage() {
       }
     }
     setUpOptionsPage(preferred);
-  }, () => setUpOptionsPage());  
+  });
 }
 
 function setUpOptionsPage(acceptedLanguage) {
@@ -45,11 +44,8 @@ function setUpOptionsPage(acceptedLanguage) {
   sourceCombo.addEventListener('change', event => loadOptions(SOURCE, event.target.value));
   targetCombo.addEventListener('change', event => loadOptions(TARGET, event.target.value));
 
-  let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
-  gettingSourceLanguage.then(setCurrentSource, onSourceError);
-
-  let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
-  gettingTargetLanguage.then(setCurrentTarget, onTargetError);
+  chrome.storage.local.get("wrSourceLanguage", setCurrentSource);
+  chrome.storage.local.get("wrTargetLanguage", setCurrentTarget);
 
   const titleLabel = document.getElementById("options-title");
   titleLabel.innerText = LANGUAGE_DATA[defaultLanguage].messages["selectLanguagesToTranslate"];
@@ -57,14 +53,14 @@ function setUpOptionsPage(acceptedLanguage) {
 
 function saveOptions(event) {
   event.preventDefault();
-  browser.storage.local.set({
+  chrome.storage.local.set({
     wrSourceLanguage: document.getElementById("source-language").value,
     wrTargetLanguage: document.getElementById("target-language").value
   });
   // Reload app after saving the new settings
-  browser.runtime.reload();
+  chrome.runtime.reload();
   // Refresh tab to avoid crazy HTML duplicate
-  browser.tabs.reload();
+  chrome.tabs.reload();
 }
 
 function loadOptions(option, languageKey) {

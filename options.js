@@ -25,6 +25,12 @@ function setUpOptionsPage(acceptedLanguage) {
     loadOptions(TARGET, targetLanguage);
   }
 
+  function setKeyTranslateStatus(result) {
+    const defaultValue = false;
+    const enabled = result.wrKeyTranslateEnabled || defaultValue;
+    document.getElementById("enableKeyTranslate").checked = enabled;
+  }
+
   function onSourceError(error) {
     console.log(`Error: ${error}`);
     loadOptions(SOURCE, defaultLanguage !== DEFAULT_SOURCE ? DEFAULT_SOURCE : DEFAULT_SOURCE_FALLBACK);
@@ -33,6 +39,11 @@ function setUpOptionsPage(acceptedLanguage) {
   function onTargetError(error) {
     console.log(`Error: ${error}`);
     loadOptions(TARGET, defaultLanguage);
+  }
+
+  function onKeyTranslateError(error) {
+    console.log(`Error: ${error}`);
+    document.getElementById("enableKeyTranslate").checked = false;
   }
 
   defaultLanguage = acceptedLanguage || "en";
@@ -45,21 +56,28 @@ function setUpOptionsPage(acceptedLanguage) {
   sourceCombo.addEventListener('change', event => loadOptions(SOURCE, event.target.value));
   targetCombo.addEventListener('change', event => loadOptions(TARGET, event.target.value));
 
-  let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
+  const gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
   gettingSourceLanguage.then(setCurrentSource, onSourceError);
 
-  let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
+  const gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
   gettingTargetLanguage.then(setCurrentTarget, onTargetError);
+
+  const gettingKeyTranslateEnabled = browser.storage.local.get("wrKeyTranslateEnabled");
+  gettingKeyTranslateEnabled.then(setKeyTranslateStatus, onKeyTranslateError);
 
   const titleLabel = document.getElementById("options-title");
   titleLabel.innerText = LANGUAGE_DATA[defaultLanguage].messages["selectLanguagesToTranslate"];
+
+  const enableKeyTranslateLabel = document.getElementById("enableKeyTranslateLabel");
+  enableKeyTranslateLabel.innerText = LANGUAGE_DATA[defaultLanguage].messages["useKey"];
 }
 
 function saveOptions(event) {
   event.preventDefault();
   browser.storage.local.set({
     wrSourceLanguage: document.getElementById("source-language").value,
-    wrTargetLanguage: document.getElementById("target-language").value
+    wrTargetLanguage: document.getElementById("target-language").value,
+    wrKeyTranslateEnabled: document.getElementById("enableKeyTranslate").checked
   });
   // Reload app after saving the new settings
   browser.runtime.reload();
@@ -130,7 +148,8 @@ const LANGUAGE_DATA = {
       'es': 'Spanish',  
       'pt': 'Portuguese',
       'fr': 'French',
-      'it': 'Italian'
+      'it': 'Italian',
+      'useKey': 'Use "T" key to translate selected text'
     }
   },
 
@@ -142,7 +161,8 @@ const LANGUAGE_DATA = {
       'es': 'Español',  
       'pt': 'Portugués',
       'fr': 'Francés',
-      'it': 'Italiano'
+      'it': 'Italiano',
+      'useKey': 'Usar la tecla "T" para traducir texto seleccionado'
     }
   },
 
@@ -154,7 +174,8 @@ const LANGUAGE_DATA = {
         'es': 'Espanhol',  
         'pt': 'Português',
         'fr': 'Francês',
-        'it': 'Italiano'
+        'it': 'Italiano',
+        'useKey': 'Use a tecla "T" para traduzir o texto selecionado'
     }
   },
 
@@ -166,7 +187,8 @@ const LANGUAGE_DATA = {
         'es': 'Espanol',  
         'pt': 'Portugais',
         'fr': 'Français',
-        'it': 'Italien'
+        'it': 'Italien',
+        'useKey': 'Utilisez le touche "T" pour traduire le texte sélectionné'
     }
   },
 
@@ -178,7 +200,8 @@ const LANGUAGE_DATA = {
         'es': 'Spagnolo',
         'pt': 'Portoghese',
         'fr': 'Francese',
-        'it': 'Italiano'
+        'it': 'Italiano',
+        'useKey': 'Utilizzare il tasto "T" per tradurre il testo selezionato'
     }
   }
 };

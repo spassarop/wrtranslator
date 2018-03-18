@@ -10,8 +10,6 @@
 #wrSaveForm select {
   width: 130px;
   height: 35px;
-  font-size: large;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border-radius: 2px;
   border: 1px solid lightgray;
 }
@@ -32,4 +30,12 @@
   border-radius: 5px;
   height: 35px;
   width: 40px;
+}
+#wrSaveForm #enableKeyTranslateLabel,
+#wrSaveForm select {
+  font-size: large;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#wrSaveForm > div {
+  margin: 15px 0px;
 }

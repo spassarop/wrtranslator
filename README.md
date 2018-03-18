@@ -4,6 +4,7 @@ WordReference Translator
 Open a new tab with WordReference&#39;s translation for the selected word. How:
 * Through a floating link (when double clicking on the word).
 * Through context menu "Translate" option.
+* Pressing the "T" key having selected text (configurable and requires permission on the site for pop ups).
 
 Try it out!
 -----------
@@ -17,7 +18,6 @@ Based on [sanoodles/wrtranslator](https://github.com/sanoodles/wrtranslator). As
 Not implemented yet or entirely:
 - Navbar button popup.
 - Floating link timeout.
-- Keyboard shortcut.
 
 Not going to be implemented:
 - Thunderbird version.

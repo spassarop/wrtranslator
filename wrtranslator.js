@@ -36,10 +36,10 @@
     }
   }
 
-  function loadLanguages() {
+  function loadConfiguration() {
     const DEFAULT_SOURCE = "es";
     const DEFAULT_TARGET = "en";
-    let gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
+    const gettingSourceLanguage = browser.storage.local.get("wrSourceLanguage");
     gettingSourceLanguage.then(setCurrentSource, loadDefaults);
 
     function setCurrentSource(result) {
@@ -48,7 +48,7 @@
         loadDefaults();
       } else {
         sourceLanguage = loadedSource;
-        let gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
+        const gettingTargetLanguage = browser.storage.local.get("wrTargetLanguage");
         gettingTargetLanguage.then(setCurrentTarget, loadDefaults);
       }
     }
@@ -59,20 +59,29 @@
         loadDefaults();
       } else {
         targetLanguage = loadedTarget;
-        addEventListeners();
+        loadEnabledTranslateKey();
       }
     }
 
     function loadDefaults() {
       sourceLanguage = DEFAULT_SOURCE;
       targetLanguage = DEFAULT_TARGET;
-      addEventListeners();
+      loadEnabledTranslateKey();
     }  
 
-    function addEventListeners() {
+    function loadEnabledTranslateKey() {
+      const gettingEnabledKeyStatus = browser.storage.local.get("wrKeyTranslateEnabled");
+      gettingEnabledKeyStatus.then((result) => {
+        const defaultValue = false;
+        const enabled = result.wrKeyTranslateEnabled || defaultValue;
+        addEventListeners(enabled);
+      }, () => addEventListeners());
+    } 
+
+    function addEventListeners(translateKeyEnabled) {
       window.addEventListener("dblclick", showFloatingLink);
       window.addEventListener("click", attemptClosing);
-      window.addEventListener("keypress", onTranslationKeyPressed);
+      if (translateKeyEnabled) window.addEventListener("keypress", onTranslationKeyPressed);
       browser.runtime.sendMessage({ 
         messages: LANGUAGE_DATA[targetLanguage].messages
       });
@@ -116,7 +125,7 @@
 
   let sourceLanguage;
   let targetLanguage;
-  loadLanguages();
+  loadConfiguration();
 
   browser.runtime.onMessage.addListener(translateInNewTab);
 

@@ -72,6 +72,7 @@
     function addEventListeners() {
       window.addEventListener("dblclick", showFloatingLink);
       window.addEventListener("click", attemptClosing);
+      window.addEventListener("keypress", onTranslationKeyPressed);
       browser.runtime.sendMessage({ 
         messages: LANGUAGE_DATA[targetLanguage].messages
       });
@@ -91,6 +92,21 @@
   function attemptClosing(event) {
     if (event.target.id !== 'wrtranslator-container' && event.target.id !== 'wrtranslator-link') {
       closeFloatingLink();
+    }
+  }
+
+  function onTranslationKeyPressed(event) {
+    const keyCode = 'KeyT';
+    if(event.code === keyCode) {
+      const selectedText = window.getSelection().toString().trim();
+      if (selectedText !== "") {
+        const url = getTranslationUrl(selectedText);
+        const newTab = window.open(url, '_blank');
+        if (newTab) {
+          //Browser has allowed it to be opened
+          newTab.focus();
+        }
+      }
     }
   }
 

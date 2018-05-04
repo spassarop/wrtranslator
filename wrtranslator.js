@@ -135,7 +135,8 @@
         'es': 'es/translation.asp?tranword=',
         'pt': 'enpt/',
         'fr': 'enfr/',
-        'it': 'enit/'
+        'it': 'enit/',
+        'de': 'ende/'
       },
       'messages': {
         'translate': 'Translate',
@@ -148,7 +149,8 @@
         'en': 'es/en/translation.asp?spen=',
         'pt': 'espt/',
         'fr': 'esfr/',
-        'it': 'esit/'
+        'it': 'esit/',
+        'de': 'esde/'
       },
       'messages': {
         'translate': 'Traducir',
@@ -186,6 +188,17 @@
       'messages': {
           'translate': 'Traduci',
           'openSettings': 'Configurazione di WordReference Translator'
+      }
+    },
+
+    'de': {
+      'partialPath': {
+        'en': 'deen/',
+        'es': 'dees/'
+      },
+      'messages': {
+          'translate': 'Übersetzen',
+          'openSettings': 'WordReference Translator Einstellungen'
       }
     }
   };

@@ -23,9 +23,8 @@
   width: 35px;
   margin: 5px 10px;
 }
-#wrSaveForm .selects button {
+#wrSaveForm button {
   background: white;
-  margin-left: 10px;  
   border: 1px solid black;
   border-radius: 5px;
   height: 35px;

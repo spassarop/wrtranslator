@@ -137,11 +137,11 @@ let sourceCombo;
 let targetCombo;
 let allOptions;
 
-const SUPPORTED_LANGUAGES = ['es', 'en', 'pt', 'fr', 'it'];
+const SUPPORTED_LANGUAGES = ['es', 'en', 'pt', 'fr', 'it', 'de'];
 
 const LANGUAGE_DATA = {
   'en': {
-    'allowedTranslations': ['es', 'pt', 'fr', 'it'],
+    'allowedTranslations': ['es', 'pt', 'fr', 'it', 'de'],
     'messages': {
       'selectLanguagesToTranslate': 'Select the languages to translate:',  
       'en': 'English',  
@@ -149,12 +149,13 @@ const LANGUAGE_DATA = {
       'pt': 'Portuguese',
       'fr': 'French',
       'it': 'Italian',
+      'de': 'German',
       'useKey': 'Use "T" key to translate selected text'
     }
   },
 
   'es': {
-    'allowedTranslations': ['en', 'pt', 'fr', 'it'],
+    'allowedTranslations': ['en', 'pt', 'fr', 'it', 'de'],
     'messages': {
       'selectLanguagesToTranslate': 'Seleccione los lenguajes a traducir:',  
       'en': 'Inglés',  
@@ -162,6 +163,7 @@ const LANGUAGE_DATA = {
       'pt': 'Portugués',
       'fr': 'Francés',
       'it': 'Italiano',
+      'de': 'Alemán',
       'useKey': 'Usar la tecla "T" para traducir texto seleccionado'
     }
   },
@@ -175,6 +177,7 @@ const LANGUAGE_DATA = {
         'pt': 'Português',
         'fr': 'Francês',
         'it': 'Italiano',
+        'de': 'Alemão',
         'useKey': 'Use a tecla "T" para traduzir o texto selecionado'
     }
   },
@@ -188,6 +191,7 @@ const LANGUAGE_DATA = {
         'pt': 'Portugais',
         'fr': 'Français',
         'it': 'Italien',
+        'de': 'Allemand',
         'useKey': 'Utilisez le touche "T" pour traduire le texte sélectionné'
     }
   },
@@ -201,7 +205,22 @@ const LANGUAGE_DATA = {
         'pt': 'Portoghese',
         'fr': 'Francese',
         'it': 'Italiano',
+        'de': 'Tedesco',
         'useKey': 'Utilizzare il tasto "T" per tradurre il testo selezionato'
+    }
+  },
+
+  'de': {
+    'allowedTranslations': ['en', 'es'],
+    'messages': {
+        'selectLanguagesToTranslate': 'Wählen Sie die zu übersetzenden Sprachen aus:',  
+        'en': 'Englisch',
+        'es': 'Spanisch',
+        'pt': 'Portugiesisch',
+        'fr': 'Französisch',
+        'it': 'Italienisch',
+        'de': 'Deutsch',
+        'useKey': 'Verwenden Sie die Taste "T", um den ausgewählten Text zu übersetzen'
     }
   }
 };

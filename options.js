@@ -1,3 +1,5 @@
+const debug = false;
+
 function getAcceptedLanguage() {
   const gettingAcceptLanguages = browser.i18n.getAcceptLanguages();
   gettingAcceptLanguages.then(languages => { 
@@ -32,17 +34,17 @@ function setUpOptionsPage(acceptedLanguage) {
   }
 
   function onSourceError(error) {
-    console.log(`Error: ${error}`);
+    if (debug) console.log(`Error: ${error}`);
     loadOptions(SOURCE, defaultLanguage !== DEFAULT_SOURCE ? DEFAULT_SOURCE : DEFAULT_SOURCE_FALLBACK);
   }
 
   function onTargetError(error) {
-    console.log(`Error: ${error}`);
+    if (debug) console.log(`Error: ${error}`);
     loadOptions(TARGET, defaultLanguage);
   }
 
   function onKeyTranslateError(error) {
-    console.log(`Error: ${error}`);
+    if (debug) console.log(`Error: ${error}`);
     document.getElementById("enableKeyTranslate").checked = false;
   }
 

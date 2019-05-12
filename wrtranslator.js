@@ -1,4 +1,5 @@
 (function () {
+  const debug = false;
 
   function showFloatingLink (event) {
     const Y_LIMMIT = 60;
@@ -85,7 +86,7 @@
       browser.runtime.sendMessage({ 
         messages: LANGUAGE_DATA[targetLanguage].messages
       });
-      console.log(`Events attached. Source language: ${sourceLanguage}. Target language: ${targetLanguage}.`);
+      if (debug) console.log(`Events attached. Source language: ${sourceLanguage}. Target language: ${targetLanguage}.`);
     }
   }
 
